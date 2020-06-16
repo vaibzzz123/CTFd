@@ -27,6 +27,7 @@ RUN for d in CTFd/plugins/*; do \
 
 RUN chmod +x /opt/CTFd/docker-entrypoint.sh
 RUN adduser -D -u 1001 -s /bin/sh ctfd
+RUN addgroup ctfd root
 RUN chown -R 1001:1001 /opt/CTFd /var/log/CTFd /var/uploads
 
 USER 1001
