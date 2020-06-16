@@ -14,7 +14,9 @@ RUN apk update && \
         py-pip \
         mysql-client \
         git \
-        openssl-dev
+        openssl-dev \
+        nano \
+        sudo
 
 COPY . /opt/CTFd
 
@@ -26,10 +28,14 @@ RUN for d in CTFd/plugins/*; do \
     done;
 
 RUN chmod +x /opt/CTFd/docker-entrypoint.sh
-RUN adduser -D -u 1001 -s /bin/sh ctfd
-RUN addgroup ctfd root
-RUN chown -R 1001:1001 /opt/CTFd /var/log/CTFd /var/uploads
+# RUN adduser -D -u 1001 -s /bin/sh ctfd
+# Removes last line of /etc/passwd, which is the line for the ctfd user
+# RUN sed -i '$ d' /etc/passwd
+# Appends line at end of /etc/passwd, ctfd user with root permission
+# RUN echo "ctfd:x:0:0:Linux User,,,:/home/ctfd:/bin/sh" >> /etc/passwd
+# RUN chown -R 1001:1001 /opt/CTFd /var/log/CTFd /var/uploads
 
-USER 1001
+# running as root
+USER 0
 EXPOSE 8000
 ENTRYPOINT ["/opt/CTFd/docker-entrypoint.sh"]
