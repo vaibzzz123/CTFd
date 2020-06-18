@@ -70,6 +70,7 @@ class Config(object):
     DATABASE_URL = os.getenv("DATABASE_URL") or "sqlite:///{}/ctfd.db".format(
         os.path.dirname(os.path.abspath(__file__))
     )
+    # print("DATABASE_URL IS " + DATABASE_URL)
     REDIS_URL = os.getenv("REDIS_URL")
 
     SQLALCHEMY_DATABASE_URI = DATABASE_URL

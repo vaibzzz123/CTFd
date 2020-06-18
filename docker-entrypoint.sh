@@ -20,18 +20,20 @@ fi
 # Check that the database is available
 if [ -n "$DATABASE_URL" ]
     then
+    # echo "DATABASE_URL IS $DATABASE_URL"
     url=`echo $DATABASE_URL | awk -F[@//] '{print $4}'`
     database=`echo $url | awk -F[:] '{print $1}'`
     port=`echo $url | awk -F[:] '{print $2}'`
-    echo "Waiting for $database:$port to be ready"
-    while ! mysqladmin ping -h "$database" -P "$port" --silent; do
+    # echo "URL, DATABASE, AND PORT IS $url, $database, $port"
+    # echo "Waiting for $database:$port to be ready"
+    # while ! mysqladmin ping -h "$database" -P "$port" --silent; do
         # Show some progress
-        echo -n '.';
-        sleep 1;
-    done
+        # echo -n '.';
+        # sleep 1;
+    # done
     echo "$database is ready"
     # Give it another second.
-    sleep 1;
+    # sleep 1;
 fi
 
 # Initialize database
